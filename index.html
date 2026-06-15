@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lo-fi type — cozy typing test</title>
+  <meta name="description" content="A cozy, lo-fi typing speed test. Practice your typing with calm, poetic sentences about rain, coffee, and late nights.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
+       CSS RESET & BASE
+    ═══════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ═══════════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════════ */
+    :root {
+      --cream:       #FAF7F2;
+      --cream-dark:  #F0EBE3;
+      --beige:       #E8DFD5;
+      --beige-warm:  #D4C5B5;
+      --brown-soft:  #9C8B7A;
+      --brown:       #6B5B4E;
+      --brown-dark:  #4A3F35;
+      --sage:        #8FAE8B;
+      --sage-light:  #B5CDB2;
+      --sage-bg:     #D6E8D3;
+      --rose:        #C4898A;
+      --rose-light:  #E0B4B5;
+      --rose-bg:     #F2D5D6;
+      --muted-gray:  #B8B0A8;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-mono:    'DM Mono', 'Courier New', monospace;
+      --shadow-sm:   0 2px 8px rgba(74, 63, 53, 0.06);
+      --shadow-md:   0 4px 20px rgba(74, 63, 53, 0.08);
+      --shadow-lg:   0 8px 40px rgba(74, 63, 53, 0.10);
+      --radius:      16px;
+      --radius-sm:   10px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ANIMATED GRADIENT BACKGROUND
+    ═══════════════════════════════════════════════ */
+    body {
+      font-family: var(--font-mono);
+      color: var(--brown-dark);
+      min-height: 100vh;
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(
+        135deg,
+        #FAF7F2 0%,
+        #F2E8DC 20%,
+        #E8DFD5 40%,
+        #D6E8D3 60%,
+        #F2D5D6 80%,
+        #FAF7F2 100%
+      );
+      background-size: 400% 400%;
+      animation: gradientDrift 25s ease infinite;
+    }
+
+    @keyframes gradientDrift {
+      0%   { background-position: 0% 50%; }
+      25%  { background-position: 100% 25%; }
+      50%  { background-position: 50% 100%; }
+      75%  { background-position: 25% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating ambient dots */
+    .bg-gradient::before,
+    .bg-gradient::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+      filter: blur(60px);
+    }
+    .bg-gradient::before {
+      width: 500px; height: 500px;
+      background: var(--sage);
+      top: -100px; right: -100px;
+      animation: floatBlob1 20s ease-in-out infinite;
+    }
+    .bg-gradient::after {
+      width: 400px; height: 400px;
+      background: var(--rose);
+      bottom: -80px; left: -80px;
+      animation: floatBlob2 18s ease-in-out infinite;
+    }
+
+    @keyframes floatBlob1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(-80px, 60px) scale(1.1); }
+      66%      { transform: translate(40px, -40px) scale(0.95); }
+    }
+    @keyframes floatBlob2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(60px, -50px) scale(1.08); }
+      66%      { transform: translate(-30px, 30px) scale(0.92); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════════ */
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════ */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .header h1 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 2.4rem;
+      color: var(--brown-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header h1 .accent {
+      font-style: italic;
+      color: var(--brown-soft);
+      font-weight: 400;
+    }
+    .header .subtitle {
+      font-size: 0.82rem;
+      color: var(--brown-soft);
+      letter-spacing: 1.5px;
+      text-transform: lowercase;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CONTROLS BAR
+    ═══════════════════════════════════════════════ */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .time-toggle, .sound-toggle {
+      display: flex;
+      background: var(--cream-dark);
+      border-radius: 30px;
+      padding: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+    .time-btn, .sound-btn {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 26px;
+      background: transparent;
+      color: var(--brown-soft);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .time-btn.active, .sound-btn.active {
+      background: var(--brown-dark);
+      color: var(--cream);
+      box-shadow: 0 2px 10px rgba(74, 63, 53, 0.15);
+    }
+    .time-btn:hover:not(.active), .sound-btn:hover:not(.active) {
+      color: var(--brown-dark);
+    }
+
+    /* ═══════════════════════════════════════════════
+       STATS ROW
+    ═══════════════════════════════════════════════ */
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 560px;
+    }
+    .stat-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-sm);
+      padding: 14px 10px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(212, 197, 181, 0.25);
+      transition: transform 0.2s ease;
+    }
+    .stat-card:hover { transform: translateY(-2px); }
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--brown-soft);
+      text-transform: lowercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+    }
+    .stat-value.wpm   { color: var(--brown-dark); }
+    .stat-value.acc    { color: var(--sage); }
+    .stat-value.timer  { color: var(--rose); }
+
+    /* ═══════════════════════════════════════════════
+       VINYL RECORD
+    ═══════════════════════════════════════════════ */
+    .vinyl-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .vinyl {
+      width: 36px;
+      height: 36px;
+      position: relative;
+    }
+    .vinyl-disc {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        var(--brown-dark) 0deg,
+        var(--brown) 30deg,
+        var(--brown-dark) 60deg,
+        var(--brown) 90deg,
+        var(--brown-dark) 120deg,
+        var(--brown) 150deg,
+        var(--brown-dark) 180deg,
+        var(--brown) 210deg,
+        var(--brown-dark) 240deg,
+        var(--brown) 270deg,
+        var(--brown-dark) 300deg,
+        var(--brown) 330deg,
+        var(--brown-dark) 360deg
+      );
+      position: relative;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .vinyl-disc::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 12px; height: 12px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--rose-light) 30%, var(--rose) 100%);
+      box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    }
+    .vinyl-disc::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 4px; height: 4px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--brown-dark);
+    }
+    .vinyl.spinning .vinyl-disc {
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .vinyl-label {
+      font-size: 0.72rem;
+      color: var(--brown-soft);
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════
+       TYPING AREA
+    ═══════════════════════════════════════════════ */
+    .typing-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(212, 197, 181, 0.2);
+      width: 100%;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .typing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sage), var(--rose-light), var(--beige-warm));
+      opacity: 0.6;
+    }
+
+    #text-display {
+      font-family: var(--font-mono);
+      font-size: 1.12rem;
+      line-height: 2;
+      letter-spacing: 0.3px;
+      color: var(--muted-gray);
+      margin-bottom: 24px;
+      min-height: 100px;
+      user-select: none;
+      word-wrap: break-word;
+    }
+    #text-display .correct {
+      color: #5E8A58;
+      background: var(--sage-bg);
+      border-radius: 2px;
+      padding: 1px 0;
+    }
+    #text-display .incorrect {
+      color: #B55A5B;
+      background: var(--rose-bg);
+      border-radius: 2px;
+      padding: 1px 0;
+      text-decoration: underline;
+      text-decoration-color: var(--rose);
+      text-underline-offset: 3px;
+    }
+    #text-display .current {
+      border-left: 2px solid var(--brown-dark);
+      animation: blink 1s step-end infinite;
+      margin-left: -1px;
+      padding-left: 1px;
+    }
+    @keyframes blink {
+      0%, 100% { border-color: var(--brown-dark); }
+      50%      { border-color: transparent; }
+    }
+
+    #typing-input {
+      width: 100%;
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      padding: 16px 20px;
+      border: 2px solid var(--beige);
+      border-radius: var(--radius-sm);
+      background: rgba(250, 247, 242, 0.8);
+      color: var(--brown-dark);
+      outline: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+    #typing-input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 4px rgba(143, 174, 139, 0.12);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    #typing-input::placeholder {
+      color: var(--beige-warm);
+      font-style: italic;
+    }
+    #typing-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--beige-warm);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESTART BUTTON
+    ═══════════════════════════════════════════════ */
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary {
+      background: var(--brown-dark);
+      color: var(--cream);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      background: var(--brown);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--brown-soft);
+      border: 1.5px solid var(--beige);
+    }
+    .btn-ghost:hover {
+      border-color: var(--brown-soft);
+      color: var(--brown-dark);
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESULTS OVERLAY
+    ═══════════════════════════════════════════════ */
+    .results-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(74, 63, 53, 0.25);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      animation: fadeIn 0.4s ease;
+    }
+    .results-overlay.show {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .results-card {
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(212, 197, 181, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .results-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sage), var(--rose-light), var(--sage));
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .results-rank-emoji {
+      font-size: 3rem;
+      margin-bottom: 4px;
+    }
+    .results-rank-label {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--brown-dark);
+      margin-bottom: 28px;
+    }
+
+    .results-stats {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .results-stat {
+      flex: 1;
+      background: var(--cream-dark);
+      border-radius: var(--radius-sm);
+      padding: 16px 8px;
+    }
+    .results-stat .label {
+      font-size: 0.68rem;
+      color: var(--brown-soft);
+      text-transform: lowercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .results-stat .value {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    .results-stat .value.wpm  { color: var(--brown-dark); }
+    .results-stat .value.acc  { color: var(--sage); }
+    .results-stat .value.time { color: var(--rose); }
+
+    .results-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* ═══════════════════════════════════════════════
+       LEADERBOARD
+    ═══════════════════════════════════════════════ */
+    .leaderboard {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .leaderboard-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--brown-dark);
+      text-align: center;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .lb-card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(212, 197, 181, 0.2);
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(212, 197, 181, 0.2);
+      transition: background 0.2s ease;
+    }
+    .lb-row:last-child { border-bottom: none; }
+    .lb-row:hover { background: rgba(212, 197, 181, 0.08); border-radius: 6px; }
+
+    .lb-rank {
+      width: 28px;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--brown-soft);
+      font-weight: 600;
+    }
+    .lb-wpm {
+      font-weight: 500;
+      color: var(--brown-dark);
+      min-width: 70px;
+      font-size: 0.9rem;
+    }
+    .lb-acc {
+      color: var(--sage);
+      min-width: 60px;
+      font-size: 0.82rem;
+    }
+    .lb-mode {
+      color: var(--rose);
+      min-width: 40px;
+      font-size: 0.78rem;
+    }
+    .lb-date {
+      margin-left: auto;
+      color: var(--muted-gray);
+      font-size: 0.75rem;
+    }
+    .lb-empty {
+      text-align: center;
+      color: var(--beige-warm);
+      font-style: italic;
+      padding: 16px;
+      font-size: 0.85rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--beige-warm);
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .app { padding: 24px 16px 40px; }
+      .header h1 { font-size: 1.8rem; }
+      .typing-card { padding: 24px 18px; }
+      #text-display { font-size: 0.98rem; }
+      .stats-row { gap: 10px; }
+      .stat-value { font-size: 1.3rem; }
+      .results-card { padding: 36px 24px; }
+      .results-stats { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <div class="app">
+    <!-- HEADER -->
+    <header class="header">
+      <h1>lo-fi <span class="accent">type</span></h1>
+      <p class="subtitle">a cozy typing test</p>
+    </header>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <div class="vinyl-container">
+        <div class="vinyl" id="vinyl">
+          <div class="vinyl-disc"></div>
+        </div>
+        <span class="vinyl-label" id="vinyl-label">press play...</span>
+      </div>
+
+      <div class="time-toggle">
+        <button class="time-btn active" data-time="30" id="btn-30">30s</button>
+        <button class="time-btn" data-time="60" id="btn-60">60s</button>
+      </div>
+
+      <div class="sound-toggle">
+        <button class="sound-btn active" id="btn-sound" title="Toggle click sounds">🔊 sound</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">wpm</div>
+        <div class="stat-value wpm" id="live-wpm">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">accuracy</div>
+        <div class="stat-value acc" id="live-acc">100%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">time</div>
+        <div class="stat-value timer" id="live-timer">30</div>
+      </div>
+    </div>
+
+    <!-- TYPING AREA -->
+    <div class="typing-card">
+      <div id="text-display"></div>
+      <input type="text" id="typing-input" placeholder="start typing here..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <p class="hint" id="hint">start typing to begin the timer</p>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="btn-row">
+      <button class="btn btn-primary" id="restart-btn">new text</button>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <section class="leaderboard">
+      <h2 class="leaderboard-title">☕ top scores</h2>
+      <div class="lb-card" id="leaderboard-body">
+        <div class="lb-empty">no scores yet — start typing!</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      lo-fi type — made with warmth & quiet keystrokes
+    </footer>
+  </div>
+
+  <!-- RESULTS OVERLAY -->
+  <div class="results-overlay" id="results-overlay">
+    <div class="results-card">
+      <div class="results-rank-emoji" id="results-emoji"></div>
+      <div class="results-rank-label" id="results-rank"></div>
+      <div class="results-stats">
+        <div class="results-stat">
+          <div class="label">wpm</div>
+          <div class="value wpm" id="results-wpm"></div>
+        </div>
+        <div class="results-stat">
+          <div class="label">accuracy</div>
+          <div class="value acc" id="results-acc"></div>
+        </div>
+        <div class="results-stat">
+          <div class="label">time</div>
+          <div class="value time" id="results-time"></div>
+        </div>
+      </div>
+      <div class="results-btns">
+        <button class="btn btn-primary" id="results-retry">try again</button>
+        <button class="btn btn-ghost" id="results-close">close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════
+       PARAGRAPHS — cozy / poetic / lo-fi vibes
+    ═══════════════════════════════════════════════ */
+    const paragraphs = [
+      "the rain taps gently against the window as you settle into your chair with a warm cup of tea. the world outside blurs into soft watercolors and for a moment everything feels perfectly still.",
+      "late nights have their own kind of magic. the hum of a desk lamp, the quiet scratch of pen on paper, and the feeling that the world has gone to sleep but you are wide awake with your thoughts.",
+      "there is something honest about coffee at midnight. no one drinks it to be productive. you drink it because the night asked you to stay a little longer and you said yes.",
+      "the bookshelf hums with stories waiting to be revisited. you pull one from the middle, its pages soft and familiar, and the room fills with the scent of old paper and quiet afternoons.",
+      "fog rolls in over the hills and wraps the town in a gentle hush. streetlights glow like small warm moons. somewhere a cat sits on a windowsill watching the world dissolve into gray.",
+      "studying feels different at two in the morning. the house is quiet and the words on the page seem to carry more weight. you underline a sentence that feels important even though you cannot say why.",
+      "you find an old playlist from years ago and press play. the first note fills the room and suddenly you are somewhere else, someone else, wrapped in a memory you forgot you were keeping.",
+      "the coffee shop on the corner has mismatched chairs and a chalkboard menu. rain streaks the windows while a jazz record crackles from somewhere behind the counter. you could stay here forever.",
+      "autumn leaves drift down like small quiet letters from the sky. the air smells of cinnamon and woodsmoke. you wrap your scarf a little tighter and walk slowly through the golden street.",
+      "some nights the city hums a lullaby. traffic sounds soften into white noise, apartment windows glow amber and gold, and you lean against the balcony railing feeling like part of something vast and gentle.",
+      "the library closes in an hour but you are not ready to leave. your notebook is full of messy ideas and half-finished diagrams. the best thoughts always arrive just before closing time.",
+      "rain and lo-fi beats have the same rhythm. slow, steady, patient. they ask nothing of you except to be present, to breathe, to let your fingers rest on the keys and type what you feel.",
+      "a candle flickers on the desk beside a stack of worn paperbacks. the wax melts slowly, pooling like honey. outside the wind whispers through pine trees and the night feels infinite and kind."
+    ];
+
+    /* ═══════════════════════════════════════════════
+       STATE
+    ═══════════════════════════════════════════════ */
+    let currentText = '';
+    let timerDuration = 30;
+    let timeLeft = 30;
+    let timerInterval = null;
+    let isRunning = false;
+    let isFinished = false;
+    let startTime = null;
+    let correctChars = 0;
+    let totalTyped = 0;
+    let lastParagraphIndex = -1;
+    let soundEnabled = true;
+    let audioCtx = null;
+    let noiseBuffer = null;
+
+    /* ═══════════════════════════════════════════════
+       DOM REFS
+    ═══════════════════════════════════════════════ */
+    const textDisplay   = document.getElementById('text-display');
+    const typingInput   = document.getElementById('typing-input');
+    const liveWpm       = document.getElementById('live-wpm');
+    const liveAcc       = document.getElementById('live-acc');
+    const liveTimer     = document.getElementById('live-timer');
+    const vinyl         = document.getElementById('vinyl');
+    const vinylLabel    = document.getElementById('vinyl-label');
+    const hint          = document.getElementById('hint');
+    const btn30         = document.getElementById('btn-30');
+    const btn60         = document.getElementById('btn-60');
+    const restartBtn    = document.getElementById('restart-btn');
+    const overlay       = document.getElementById('results-overlay');
+    const resultsEmoji  = document.getElementById('results-emoji');
+    const resultsRank   = document.getElementById('results-rank');
+    const resultsWpm    = document.getElementById('results-wpm');
+    const resultsAcc    = document.getElementById('results-acc');
+    const resultsTime   = document.getElementById('results-time');
+    const resultsRetry  = document.getElementById('results-retry');
+    const resultsClose  = document.getElementById('results-close');
+    const lbBody        = document.getElementById('leaderboard-body');
+    const btnSound      = document.getElementById('btn-sound');
+
+    /* ═══════════════════════════════════════════════
+       INIT
+    ═══════════════════════════════════════════════ */
+    function pickParagraph() {
+      let idx;
+      do { idx = Math.floor(Math.random() * paragraphs.length); }
+      while (idx === lastParagraphIndex && paragraphs.length > 1);
+      lastParagraphIndex = idx;
+      return paragraphs[idx];
+    }
+
+    function renderText(typed) {
+      const chars = currentText.split('');
+      let html = '';
+      for (let i = 0; i < chars.length; i++) {
+        if (i < typed.length) {
+          if (typed[i] === chars[i]) {
+            html += `<span class="correct">${escapeHtml(chars[i])}</span>`;
+          } else {
+            html += `<span class="incorrect">${escapeHtml(chars[i])}</span>`;
+          }
+        } else if (i === typed.length) {
+          html += `<span class="current">${escapeHtml(chars[i])}</span>`;
+        } else {
+          html += escapeHtml(chars[i]);
+        }
+      }
+      textDisplay.innerHTML = html;
+    }
+
+    function escapeHtml(ch) {
+      if (ch === '&') return '&amp;';
+      if (ch === '<') return '&lt;';
+      if (ch === '>') return '&gt;';
+      return ch;
+    }
+
+    function resetGame() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      isFinished = false;
+      startTime = null;
+      correctChars = 0;
+      totalTyped = 0;
+      timeLeft = timerDuration;
+
+      currentText = pickParagraph();
+      renderText('');
+      typingInput.value = '';
+      typingInput.disabled = false;
+      typingInput.focus();
+
+      liveWpm.textContent = '0';
+      liveAcc.textContent = '100%';
+      liveTimer.textContent = timerDuration;
+      hint.textContent = 'start typing to begin the timer';
+      vinyl.classList.remove('spinning');
+      vinylLabel.textContent = 'press play...';
+      overlay.classList.remove('show');
+    }
+
+    /* ═══════════════════════════════════════════════
+       TIMER
+    ═══════════════════════════════════════════════ */
+    function startTimer() {
+      if (isRunning) return;
+      isRunning = true;
+      startTime = Date.now();
+      vinyl.classList.add('spinning');
+      vinylLabel.textContent = 'now playing...';
+      hint.textContent = 'keep going, you\'re doing great';
+
+      timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timeLeft = Math.max(0, timerDuration - elapsed);
+        liveTimer.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 200);
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      isFinished = true;
+      typingInput.disabled = true;
+      vinyl.classList.remove('spinning');
+      vinylLabel.textContent = 'track ended';
+
+      const wpm = calcWPM();
+      const acc = calcAccuracy();
+      showResults(wpm, acc);
+      saveScore(wpm, acc);
+      renderLeaderboard();
+    }
+
+    /* ═══════════════════════════════════════════════
+       CALCULATIONS
+    ═══════════════════════════════════════════════ */
+    function calcWPM() {
+      if (!startTime) return 0;
+      const elapsedMin = (Date.now() - startTime) / 60000;
+      if (elapsedMin === 0) return 0;
+      // Standard: 1 word = 5 characters
+      const wordsTyped = correctChars / 5;
+      return Math.round(wordsTyped / elapsedMin);
+    }
+
+    function calcAccuracy() {
+      if (totalTyped === 0) return 100;
+      return Math.round((correctChars / totalTyped) * 100);
+    }
+
+    /* ═══════════════════════════════════════════════
+       INPUT HANDLER
+    ═══════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════
+       AUDIO SYNTHESIS
+    ═══════════════════════════════════════════════ */
+    function getNoiseBuffer(audioCtx) {
+      if (noiseBuffer) return noiseBuffer;
+      const bufferSize = audioCtx.sampleRate * 0.1; // 100ms buffer
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      noiseBuffer = buffer;
+      return noiseBuffer;
+    }
+
+    function playClick(key) {
+      if (!soundEnabled) return;
+
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const now = audioCtx.currentTime;
+
+        // Create Noise source for the crisp plastic strike
+        const noiseSource = audioCtx.createBufferSource();
+        noiseSource.buffer = getNoiseBuffer(audioCtx);
+        
+        const noiseFilter = audioCtx.createBiquadFilter();
+        noiseFilter.type = 'bandpass';
+        
+        const noiseGain = audioCtx.createGain();
+        
+        // Create tone oscillator for the mechanical bottom-out
+        const toneOsc = audioCtx.createOscillator();
+        const toneGain = audioCtx.createGain();
+        
+        // Connect nodes
+        noiseSource.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(audioCtx.destination);
+        
+        toneOsc.connect(toneGain);
+        toneGain.connect(audioCtx.destination);
+
+        const pitchOffset = Math.random() * 150 - 75;
+
+        if (key === ' ') {
+          // Spacebar: lower, deeper, hollower "clack"
+          noiseFilter.frequency.setValueAtTime(1400 + pitchOffset, now);
+          noiseFilter.Q.setValueAtTime(2.5, now);
+          noiseGain.gain.setValueAtTime(0.06, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+          
+          toneOsc.type = 'triangle';
+          toneOsc.frequency.setValueAtTime(150 + Math.random() * 10, now);
+          toneOsc.frequency.exponentialRampToValueAtTime(60, now + 0.05);
+          toneGain.gain.setValueAtTime(0.14, now);
+          toneGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+          
+          noiseSource.start(now);
+          noiseSource.stop(now + 0.05);
+          toneOsc.start(now);
+          toneOsc.stop(now + 0.07);
+        } else if (key === 'Backspace') {
+          // Backspace: heavier key sound
+          noiseFilter.frequency.setValueAtTime(2200 + pitchOffset, now);
+          noiseFilter.Q.setValueAtTime(3.5, now);
+          noiseGain.gain.setValueAtTime(0.07, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+          
+          toneOsc.type = 'sine';
+          toneOsc.frequency.setValueAtTime(210 + pitchOffset * 0.1, now);
+          toneOsc.frequency.exponentialRampToValueAtTime(110, now + 0.04);
+          toneGain.gain.setValueAtTime(0.08, now);
+          toneGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          
+          noiseSource.start(now);
+          noiseSource.stop(now + 0.03);
+          toneOsc.start(now);
+          toneOsc.stop(now + 0.06);
+        } else {
+          // Standard key: crisp high-pitched mechanical tick
+          noiseFilter.frequency.setValueAtTime(3300 + pitchOffset * 3, now);
+          noiseFilter.Q.setValueAtTime(5, now); // high Q makes it crisp and resonant
+          noiseGain.gain.setValueAtTime(0.11, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.016);
+          
+          toneOsc.type = 'sine';
+          toneOsc.frequency.setValueAtTime(380 + pitchOffset * 0.2, now);
+          toneOsc.frequency.exponentialRampToValueAtTime(140, now + 0.02);
+          toneGain.gain.setValueAtTime(0.05, now);
+          toneGain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+          
+          noiseSource.start(now);
+          noiseSource.stop(now + 0.02);
+          toneOsc.start(now);
+          toneOsc.stop(now + 0.03);
+        }
+      } catch (err) {
+        console.warn("Failed to play audio click:", err);
+      }
+    }
+
+    typingInput.addEventListener('keydown', (e) => {
+      if (isFinished) return;
+      if (e.key.length === 1 || e.key === 'Backspace') {
+        playClick(e.key);
+      }
+    });
+
+    typingInput.addEventListener('input', () => {
+      if (isFinished) return;
+      if (!isRunning) startTimer();
+
+      const typed = typingInput.value;
+      renderText(typed);
+
+      // Recalculate accuracy from scratch each keystroke
+      correctChars = 0;
+      totalTyped = typed.length;
+      for (let i = 0; i < typed.length && i < currentText.length; i++) {
+        if (typed[i] === currentText[i]) correctChars++;
+      }
+
+      liveWpm.textContent = calcWPM();
+      liveAcc.textContent = calcAccuracy() + '%';
+
+      // If they typed everything
+      if (typed.length >= currentText.length) {
+        endGame();
+      }
+    });
+
+    // Prevent pasting
+    typingInput.addEventListener('paste', e => e.preventDefault());
+
+    /* ═══════════════════════════════════════════════
+       RESULTS
+    ═══════════════════════════════════════════════ */
+    function getRank(wpm) {
+      if (wpm > 100) return { emoji: '🔥', label: 'hands can\'t stop' };
+      if (wpm >= 81)  return { emoji: '🎧', label: 'in the zone' };
+      if (wpm >= 61)  return { emoji: '🌙', label: 'midnight flow' };
+      if (wpm >= 41)  return { emoji: '☕', label: 'third cup of coffee' };
+      if (wpm >= 21)  return { emoji: '🌧️', label: 'rainy afternoon' };
+      return { emoji: '☁️', label: 'just woke up' };
+    }
+
+    function showResults(wpm, acc) {
+      const rank = getRank(wpm);
+      resultsEmoji.textContent = rank.emoji;
+      resultsRank.textContent = rank.label;
+      resultsWpm.textContent = wpm;
+      resultsAcc.textContent = acc + '%';
+      resultsTime.textContent = timerDuration + 's';
+      overlay.classList.add('show');
+    }
+
+    /* ═══════════════════════════════════════════════
+       LEADERBOARD (localStorage)
+    ═══════════════════════════════════════════════ */
+    function getScores() {
+      try {
+        return JSON.parse(localStorage.getItem('lofi_type_scores') || '[]');
+      } catch { return []; }
+    }
+
+    function saveScore(wpm, acc) {
+      const scores = getScores();
+      scores.push({
+        wpm,
+        acc,
+        mode: timerDuration + 's',
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      });
+      scores.sort((a, b) => b.wpm - a.wpm);
+      localStorage.setItem('lofi_type_scores', JSON.stringify(scores.slice(0, 5)));
+    }
+
+    function renderLeaderboard() {
+      const scores = getScores();
+      if (scores.length === 0) {
+        lbBody.innerHTML = '<div class="lb-empty">no scores yet — start typing!</div>';
+        return;
+      }
+      const medals = ['✦', '✧', '·', '·', '·'];
+      lbBody.innerHTML = scores.map((s, i) => `
+        <div class="lb-row">
+          <span class="lb-rank">${medals[i] || '·'}</span>
+          <span class="lb-wpm">${s.wpm} wpm</span>
+          <span class="lb-acc">${s.acc}%</span>
+          <span class="lb-mode">${s.mode}</span>
+          <span class="lb-date">${s.date}</span>
+        </div>
+      `).join('');
+    }
+
+    /* ═══════════════════════════════════════════════
+       EVENT LISTENERS
+    ═══════════════════════════════════════════════ */
+    btn30.addEventListener('click', () => {
+      if (isRunning) return;
+      timerDuration = 30;
+      btn30.classList.add('active');
+      btn60.classList.remove('active');
+      resetGame();
+    });
+
+    btn60.addEventListener('click', () => {
+      if (isRunning) return;
+      timerDuration = 60;
+      btn60.classList.add('active');
+      btn30.classList.remove('active');
+      resetGame();
+    });
+
+    restartBtn.addEventListener('click', resetGame);
+    resultsRetry.addEventListener('click', resetGame);
+    resultsClose.addEventListener('click', () => overlay.classList.remove('show'));
+
+    btnSound.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        btnSound.classList.add('active');
+        btnSound.textContent = '🔊 sound';
+      } else {
+        btnSound.classList.remove('active');
+        btnSound.textContent = '🔇 sound';
+      }
+    });
+
+    // Close overlay on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && overlay.classList.contains('show')) {
+        overlay.classList.remove('show');
+      }
+    });
+
+    // Click outside results card to close
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('show');
+    });
+
+    /* ═══════════════════════════════════════════════
+       BOOT
+    ═══════════════════════════════════════════════ */
+    resetGame();
+    renderLeaderboard();
+  </script>
+</body>
+</html>
